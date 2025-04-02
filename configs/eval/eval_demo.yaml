@@ -1,0 +1,27 @@
+DATA:
+  CLASS_NAME_FILE: 'configs/namefiles/coco80.names'
+  AUGMENT: 0  # 不做数据增强
+
+DETECTOR:
+  NAME: ["YOLOV5"]
+  INPUT_SIZE: [352, 640]
+  BATCH_SIZE: 1           # batch size when training. BATCH_SIZE = const 1 when evaluating
+  CONF_THRESH: 0.25        # confidence thresh in NMS
+  IOU_THRESH: 0.45        # iou thresh in NMS
+  PERTURB:
+    GATE: null
+
+ATTACKER:
+  METHOD: ""
+  MAX_EPOCH:
+  ITER_STEP:
+  STEP_LR:
+  tv_eta:
+  ATTACK_CLASS: '-1'  # attack class index (corresponds to the above namesfile). Now we support to attack class id='0'(person) only.
+  LOSS_FUNC: ""
+
+  PATCH:
+    WIDTH: 640
+    HEIGHT: 224
+    TRANSFORM:
+    INIT: 'mud_spot'  # 'raindrop

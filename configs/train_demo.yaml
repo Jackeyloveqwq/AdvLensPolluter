@@ -1,0 +1,30 @@
+DATA:
+  CLASS_NAME_FILE: 'configs/namefiles/coco80.names'
+  AUGMENT: 0  #
+  TRAIN:
+    IMG_DIR: ''
+    LAB_DIR: ''
+
+DETECTOR:
+  NAME: ["YOLOV2"]
+  INPUT_SIZE: [352, 640]
+  BATCH_SIZE: 4      # batch size when training. BATCH_SIZE = const 1 when evaluating
+  CONF_THRESH: 0.25        # confidence thresh in NMS
+  IOU_THRESH: 0.45        # iou thresh in NMS
+
+
+ATTACKER:
+  METHOD: "optim"
+  MAX_EPOCH: 6 # maximum epoches
+  ITER_STEP: # Attack steps in every mini-batch
+  STEP_LR: 0.03 # update step size for every (mini-batch) step.
+  ATTACK_CLASS: '11' # attack class index (corresponds to the above namesfile). Now we support to attack class id='0'(person) only.
+  LOSS_FUNC: 'custom-attack' # choose LossFn from [null, 'descend-mse', 'ascend-mse', 'obj', 'craft-attack', 'magic-attack']
+  LR_SCHEDULER: 'ALRS' # choose LR from ['plateau', 'ALRS', 'warmupALRS', 'cosine', 'ALRS_LowerTV']
+  ATTACK_TYPE:  ''# choose attack type from ['indiscriminate_attack', 'class_specify']
+  TOPX_CONFS: 10
+  PATCH:
+    WIDTH: 640
+    HEIGHT: 352
+    TRANSFORM:
+    INIT: 'raindrop'  # 'color_dots', 'raindrop', 'mud_spot'
